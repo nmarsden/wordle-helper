@@ -75,30 +75,6 @@ body,
     color: var(--dark-red);
 }
 
-.suggestionHeading {
-    padding-top: 1rem;
-}
-
-.lightbulbIcon {
-    padding-right: 0.25rem;
-}
-
-.suggestedGuess {
-    display: flex;
-    margin-top: 5px;
-}
-
-.suggestedIcon {
-    position: absolute;
-    height: 2rem;
-    transform: translate(-2rem, 0.5rem);
-    color: var(--light-yellow);
-}
-
-.suggestedGuess .guessLetter {
-    border: 1px solid var(--text-color);
-}
-
 .keyboard {
     display: flex;
     flex-direction: column;
@@ -138,4 +114,32 @@ body,
 
 .hint-required {
     color: var(--dark-red);
+}
+
+
+.suggestion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.suggestionHeading {
+    padding-top: 1rem;
+}
+
+.suggestionIcon {
+    padding-right: 0.25rem;
+}
+
+.suggestionWord {
+    display: flex;
+    margin-top: 5px;
+}
+
+.suggestionButton {
+    margin-left: 0.25rem;
+    padding: 0.4rem;
+    font-size: 0.8rem;
+    background-color: var(--light-grey);
+    border-radius: 5px;
 }
