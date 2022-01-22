@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Wordle Helper</title>
+    <link href="font_awesome/css/all.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <i class="fas fa-redo"></i>
+        <div class="heading">WORDLE HELPER</div>
+        <i class="fas fa-cog"></i>
+    </div>
+    <div class="guesses">
+        <div class="guess">
+            <div class="guessLetter hint-absent">A</div>
+            <div class="guessLetter hint-absent">U</div>
+            <div class="guessLetter hint-absent">D</div>
+            <div class="guessLetter hint-present">I</div>
+            <div class="guessLetter hint-absent">O</div>
+        </div>
+        <div class="guess">
+            <div class="guessLetter hint-absent">T</div>
+            <div class="guessLetter hint-absent">H</div>
+            <div class="guessLetter hint-present">I</div>
+            <div class="guessLetter hint-present">N</div>
+            <div class="guessLetter hint-absent">K</div>
+        </div>
+        <div class="guess">
+            <div class="guessLetter hint-present">N</div>
+            <div class="guessLetter hint-correct">I</div>
+            <div class="guessLetter hint-present">C</div>
+            <div class="guessLetter hint-present">E</div>
+            <div class="guessLetter hint-absent">R</div>
+        </div>
+        <div class="guess">
+            <div class="guessLetter hint-required hintButton">S</div>
+            <div class="guessLetter hint-required hintButton">I</div>
+            <div class="guessLetter"></div>
+            <div class="guessLetter"></div>
+            <div class="guessLetter"></div>
+        </div>
+        <div class="guess">
+            <div class="guessLetter"></div>
+            <div class="guessLetter"></div>
+            <div class="guessLetter"></div>
+            <div class="guessLetter"></div>
+            <div class="guessLetter"></div>
+        </div>
+        <div class="suggestionHeading"><i class="far fa-lightbulb lightbulbIcon"></i>Suggestion</div>
+        <div class="suggestedGuess">
+            <div class="guessLetter">S</div>
+            <div class="guessLetter">I</div>
+            <div class="guessLetter">N</div>
+            <div class="guessLetter">C</div>
+            <div class="guessLetter">E</div>
+        </div>
+    </div>
+    <div class="keyboard">
+        <div class="keyboardRow">
+            <div class="key">Q</div>
+            <div class="key">W</div>
+            <div class="key hint-present">E</div>
+            <div class="key hint-absent">R</div>
+            <div class="key hint-absent">T</div>
+            <div class="key">Y</div>
+            <div class="key hint-absent">U</div>
+            <div class="key hint-correct">I</div>
+            <div class="key hint-absent">O</div>
+            <div class="key">P</div>
+        </div>
+        <div class="keyboardRow">
+            <div class="key hint-absent">A</div>
+            <div class="key">S</div>
+            <div class="key hint-absent">D</div>
+            <div class="key">F</div>
+            <div class="key">G</div>
+            <div class="key hint-absent">H</div>
+            <div class="key">J</div>
+            <div class="key hint-absent">K</div>
+            <div class="key">L</div>
+        </div>
+        <div class="keyboardRow">
+            <div class="key">Z</div>
+            <div class="key">X</div>
+            <div class="key hint-present">C</div>
+            <div class="key">V</div>
+            <div class="key">B</div>
+            <div class="key hint-present">N</div>
+            <div class="key">M</div>
+            <div class="key key-backspace"><i class="fas fa-backspace"></i></div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
