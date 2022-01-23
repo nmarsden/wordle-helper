@@ -13,8 +13,8 @@ Used [Font Awesome](https://fontawesome.com/) for icons
 
 ## TODOs
 * [x] initial design
-* [ ] allow entering a letter
-* [ ] allow deleting the last letter
+* [x] allow entering a letter
+* [x] allow deleting the last letter
 * [ ] allow entering a hint for a letter: absent (grey), present (yellow), or correct (green)
 * [ ] obtain Wordle word list
 * [ ] order Wordle words by popularity  
