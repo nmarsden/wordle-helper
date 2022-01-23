@@ -60,6 +60,10 @@ body,
     aspect-ratio: 1 / 1;
     text-align: center;
     border: 1px solid var(--dark-grey);
+    text-transform: uppercase;
+}
+
+.guess .guessLetter {
     cursor: pointer;
 }
 
@@ -122,6 +126,8 @@ body,
 
 .suggestionHeading {
     padding-top: 1rem;
+    padding-bottom: 0.25rem;
+    line-height: 1rem;
 }
 
 .suggestionIcon {
@@ -139,4 +145,10 @@ body,
     font-size: 0.8rem;
     background-color: var(--light-grey);
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.suggestionButton.disabled {
+    opacity: 0.5;
+    cursor: unset;
 }
