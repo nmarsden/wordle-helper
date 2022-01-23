@@ -15,7 +15,7 @@ Used [Font Awesome](https://fontawesome.com/) for icons
 * [x] initial design
 * [x] allow entering a letter
 * [x] allow deleting the last letter
-* [ ] allow entering a hint for a letter: absent (grey), present (yellow), or correct (green)
+* [x] allow entering a hint for a letter: absent (grey), present (yellow), or correct (green)
 * [ ] obtain Wordle word list
 * [ ] order Wordle words by popularity  
 * [ ] calculate and show suggestion
