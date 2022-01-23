@@ -9,6 +9,7 @@ const AVAILABLE_WORDS = [ "cigar", "rebut", "sissy", "humph", "awake", "blush", 
 //                 State
 // ----------------------------------------
 
+const resetButtonElem = document.getElementById('resetButton');
 const keyElems = document.querySelectorAll('.keyboard .key');
 const guessLetterElems = document.querySelectorAll('.guesses .guessLetter');
 const suggestionLetterElems = document.querySelectorAll('.suggestionWord .guessLetter');
@@ -21,6 +22,13 @@ let suggestion = '';
 //             Event Handlers
 // ----------------------------------------
 
+const onResetButtonClicked = (event) => {
+    while (currentGuessLetterIndex !== 0) {
+        removeLetter();
+    }
+    updateSuggestion();
+};
+
 const onKeyClicked = (event) => {
     const key = event.currentTarget.dataset.key;
     if (currentGuessLetterIndex === 0 && key === 'BACKSPACE') {
@@ -30,17 +38,13 @@ const onKeyClicked = (event) => {
         return;
     }
     if (key === 'BACKSPACE') {
-        currentGuessLetterIndex--;
-        guessLetterElems[currentGuessLetterIndex].textContent = '';
-        guessLetterElems[currentGuessLetterIndex].classList.remove('hintRequired');
-        guessLetterElems[currentGuessLetterIndex].classList.remove(`hint-${guessLetters[currentGuessLetterIndex].hint}`);
-        guessLetters[currentGuessLetterIndex] = { letter: '', hint: '', position: -1 };
+        removeLetter();
     } else {
         addLetter(key);
     }
 
     updateSuggestion();
-}
+};
 
 const onGuessLetterClicked = (index) => {
     return (event) => {
@@ -62,14 +66,14 @@ const onGuessLetterClicked = (index) => {
 
         updateSuggestion();
     }
-}
+};
 
 const onSuggestionUseButtonClicked = (event) => {
     if (isSuggestionUseDisabled()) {
         return;
     }
     suggestion.split('').forEach(addLetter);
-}
+};
 
 // ----------------------------------------
 //               Functions
@@ -78,10 +82,11 @@ const onSuggestionUseButtonClicked = (event) => {
 const init = () => {
     guessLetters.fill({ letter: '', hint: '', position: -1 });
 
+    resetButtonElem.addEventListener('click', onResetButtonClicked)
     keyElems.forEach(elem => elem.addEventListener('click', onKeyClicked));
     guessLetterElems.forEach((elem, index) => elem.addEventListener('click', onGuessLetterClicked(index)));
     suggestionUseButtonElem.addEventListener('click', onSuggestionUseButtonClicked)
-}
+};
 
 const initialHint = (letter, position) => {
     // determine if letter is known to 'absent'
@@ -92,6 +97,14 @@ const initialHint = (letter, position) => {
     // determine if letter is known to be 'present' or 'correct' for this position
     const matchingGuessLetters = guessLetters.filter(guess => guess.letter === letter && guess.position === position);
     return matchingGuessLetters.length > 0 ? matchingGuessLetters[0].hint : '';
+};
+
+const removeLetter = () => {
+    currentGuessLetterIndex--;
+    guessLetterElems[currentGuessLetterIndex].textContent = '';
+    guessLetterElems[currentGuessLetterIndex].classList.remove('hintRequired');
+    guessLetterElems[currentGuessLetterIndex].classList.remove(`hint-${guessLetters[currentGuessLetterIndex].hint}`);
+    guessLetters[currentGuessLetterIndex] = { letter: '', hint: '', position: -1 };
 }
 
 const addLetter = (letter) => {
@@ -102,7 +115,7 @@ const addLetter = (letter) => {
     guessLetterElems[currentGuessLetterIndex].classList.add(hint === '' ? 'hintRequired' : `hint-${hint}`);
     guessLetters[currentGuessLetterIndex] = { letter: letter, hint: hint, position: position };
     currentGuessLetterIndex++;
-}
+};
 
 const suggestionHint = (letter, position) => {
     // TODO fix bug: handle hints for duplicate letters in a suggested word, ie. if a letter is not known to appear twice in the word, then don't hint it twice
@@ -128,7 +141,7 @@ const suggestionHint = (letter, position) => {
         return 'present';
     }
     return '';
-}
+};
 
 const isSuggestionUseDisabled = () => {
     return currentGuessLetterIndex > 20
@@ -136,9 +149,22 @@ const isSuggestionUseDisabled = () => {
         || suggestion === ''
         || (currentGuessLetterIndex > 0 && guessLetters.slice(currentGuessLetterIndex - 5, currentGuessLetterIndex).map(g => g.letter).join('') === suggestion)
         || guessLetters.some(guessLetter => guessLetter.letter !== '' && guessLetter.hint === '');
-}
+};
 
 const updateSuggestion = () => {
+    // TODO fix bug: not suggesting a word when a letter has multiple hints and one is 'absent' in the same word
+    //      eg.         C O L O N
+    //                  a p p a p
+    //      .
+    //      suggests:   -nothing-
+    //      should suggest a word containing a single O, and one or more L & N
+
+    // TODO fix bug: not suggesting words when duplicate letters have hints: present & correct
+    //      eg.         E V E R Y
+    //                  p a c p a
+    //      .
+    //      suggests:   F R E S H
+    //      should recommend a word containing two E's such as GREET, CREEK, QUEER, FREER, CREED, CREEP, SNEER, PREEN, BREED, CREME, FREED, CHEER, GREEN, SHEER, GREED, STEER
     // no suggested words when no hints
     const hintedLetters = guessLetters.filter(guessLetter => guessLetter.hint !== '').map(guessLetter => guessLetter.letter);
     let suggestedWords = hintedLetters.length > 0 ? AVAILABLE_WORDS : [];
@@ -165,6 +191,8 @@ const updateSuggestion = () => {
         }));
     }
 
+    console.info(suggestedWords);
+
     suggestion = suggestedWords.length > 0 ? suggestedWords[0] : '';
 
     // show suggestion
@@ -184,6 +212,6 @@ const updateSuggestion = () => {
     } else {
         suggestionUseButtonElem.classList.remove('disabled');
     }
-}
+};
 
 init();

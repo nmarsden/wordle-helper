@@ -18,6 +18,6 @@ Used [Font Awesome](https://fontawesome.com/) for icons
 * [x] allow entering a hint for a letter: absent (grey), present (yellow), or correct (green)
 * [x] obtain Wordle word list
 * [x] calculate and show suggestion
-* [ ] allow reset
+* [x] allow reset
 * [x] allow applying suggestion
 * [ ] allow auto-enter first word on reset based on a configured word in settings

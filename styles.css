@@ -31,7 +31,8 @@ body,
     display: flex;
 }
 
-.redoButton {
+.resetButton {
+    cursor: pointer;
 }
 
 .heading {
