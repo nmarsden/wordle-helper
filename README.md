@@ -20,4 +20,6 @@ Used [Font Awesome](https://fontawesome.com/) for icons
 * [x] calculate and show suggestion
 * [x] allow reset
 * [x] allow applying suggestion
+* [x] introduce unit tests  
+* [ ] splash warning message
 * [ ] allow auto-enter first word on reset based on a configured word in settings
