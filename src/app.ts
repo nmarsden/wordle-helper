@@ -7,7 +7,10 @@ export type Elems = {
     confirmationContinueButtonElem: HTMLElement;
     exitModalElem: HTMLElement;
     exitModalReconfirmButtonElem: HTMLElement;
+    infoModalElem: HTMLElement;
+    infoModalOKButtonElem: HTMLElement;
     resetButtonElem: HTMLElement;
+    infoButtonElem: HTMLElement;
     keyElems: NodeListOf<Element>;
     guessLetterElems: NodeListOf<Element>;
     suggestionLetterElems: NodeListOf<Element>;
@@ -39,7 +42,10 @@ class WordleHelper {
             confirmationContinueButtonElem: document.getElementById('confirmationModalContinueButton'),
             exitModalElem: document.getElementById('exitModal'),
             exitModalReconfirmButtonElem: document.getElementById('exitModalReconfirmButton'),
+            infoModalElem: document.getElementById('infoModal'),
+            infoModalOKButtonElem: document.getElementById('infoModalOKButton'),
             resetButtonElem: document.getElementById('resetButton'),
+            infoButtonElem: document.getElementById('infoButton'),
             keyElems: document.querySelectorAll('.keyboard .key'),
             guessLetterElems: document.querySelectorAll('.guesses .guessLetter'),
             suggestionLetterElems: document.querySelectorAll('.suggestionWord .guessLetter'),
@@ -55,8 +61,10 @@ class WordleHelper {
         }
         this.elems.confirmationCancelButtonElem.addEventListener('click', this.onConfirmationCancelButtonClicked)
         this.elems.confirmationContinueButtonElem.addEventListener('click', this.onConfirmationContinueButtonClicked)
-        this.elems.exitModalReconfirmButtonElem.addEventListener('click', this.onexitModalReconfirmButtonClicked)
+        this.elems.exitModalReconfirmButtonElem.addEventListener('click', this.onExitModalReconfirmButtonClicked)
+        this.elems.infoModalOKButtonElem.addEventListener('click', this.onInfoModalOKButtonClicked)
         this.elems.resetButtonElem.addEventListener('click', this.onResetButtonClicked)
+        this.elems.infoButtonElem.addEventListener('click', this.onInfoButtonClicked)
         this.elems.keyElems.forEach(elem => elem.addEventListener('click', this.onKeyClicked));
         this.elems.guessLetterElems.forEach((elem, index) => elem.addEventListener('click', this.onGuessLetterClicked(index)));
         this.elems.suggestionUseButtonElem.addEventListener('click', this.onSuggestionUseButtonClicked)
@@ -72,10 +80,15 @@ class WordleHelper {
 
     onConfirmationContinueButtonClicked = (event) => {
         this.elems.confirmationModalElem.classList.add('hide');
+        this.elems.infoModalElem.classList.remove('hide');
     }
 
-    onexitModalReconfirmButtonClicked = (event) => {
+    onExitModalReconfirmButtonClicked = (event) => {
         this.elems.exitModalElem.classList.add('hide');
+    }
+
+    onInfoModalOKButtonClicked = (event) => {
+        this.elems.infoModalElem.classList.add('hide');
     }
 
     onResetButtonClicked = (event) => {
@@ -84,6 +97,10 @@ class WordleHelper {
         }
         this.updateSuggestion();
     };
+
+    onInfoButtonClicked = (event) => {
+        this.elems.infoModalElem.classList.remove('hide');
+    }
 
     onKeyClicked = (event) => {
         const key = event.currentTarget.dataset.key;

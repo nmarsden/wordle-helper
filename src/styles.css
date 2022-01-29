@@ -31,7 +31,8 @@ body,
     display: flex;
 }
 
-.resetButton {
+.resetButton,
+.infoButton {
     cursor: pointer;
 }
 
@@ -244,4 +245,62 @@ body,
     padding: 1rem;
     color: var(--dark-red);
     cursor: pointer;
+}
+
+.infoModal-header {
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: 600;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    text-align: center;
+}
+
+.infoModal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    line-height: 1.5rem;
+    margin: 0 1rem;
+}
+
+.infoModal-bold {
+    font-weight: 600;
+}
+
+.infoModal-hintAbsent,
+.infoModal-hintPresent,
+.infoModal-hintCorrect {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+}
+
+.infoModal-hintAbsent {
+    background-color: var(--dark-grey);
+}
+
+.infoModal-hintPresent {
+    background-color: var(--dark-yellow);
+    color: var(--bg-color);
+}
+
+.infoModal-hintCorrect {
+    background-color: var(--dark-green);
+    color: var(--bg-color);
+}
+
+.infoModal-button {
+    font-size: 1.2rem;
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 0.2rem;
+    min-width: 8rem;
+    color: var(--text-color);
+    border: 1px solid var(--dark-grey);
+    cursor: pointer;
+    user-select: none;
+    margin-top: 2rem;
 }

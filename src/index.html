@@ -12,7 +12,7 @@
     <div class="header">
         <i id="resetButton" title="Reset" class="resetButton fas fa-redo"></i>
         <div class="heading">WORDLE HELPER</div>
-        <i class="fas fa-cog"></i>
+        <i id="infoButton" title="Information" class="infoButton fas fa-question"></i>
     </div>
     <div class="guesses">
         <div class="guess">
@@ -116,6 +116,18 @@
         <div class="exitModal-happyFace"><i class="fas fa-smile"></i></div>
         <div>You made the right decision.</div>
         <div id="exitModalReconfirmButton" class="exitModal-reconfirm"><i class="fas fa-exclamation-triangle"></i></div>
+    </div>
+    <div id="infoModal" class="modal hide">
+        <div class="infoModal-header">
+            <i class="fas fa-question-circle"></i>
+            <div>wordle helper</div>
+        </div>
+        <div class="infoModal-body">
+            <div>Enter played words with hints and a <i class="suggestionIcon far fa-lightbulb"></i><span class="infoModal-bold">suggestion</span> will be automatically calculated according to the information you provide.</div>
+            <div>To enter a hint, click a played letter. Click multiple times to set as <span class="infoModal-hintAbsent"></span>, <span class="infoModal-hintPresent"></span> or <span class="infoModal-hintCorrect"></span>.</div>
+            <div>Click USE to fill the next word with the suggestion.</div>
+        </div>
+        <button id="infoModalOKButton" class="infoModal-button">OK</button>
     </div>
 </body>
 </html>
