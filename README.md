@@ -10,6 +10,7 @@ The suggestion is determined based on the known set of Wordle words, and the let
 Built using HTML, CSS, and TypeScript. 
 
 Used [Font Awesome](https://fontawesome.com/) for icons.
+
 Used [Parcel](https://parceljs.org/) to build.
 
 ## TODOs
