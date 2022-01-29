@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="header">
-        <i id="resetButton" class="resetButton fas fa-redo"></i>
+        <i id="resetButton" title="Reset" class="resetButton fas fa-redo"></i>
         <div class="heading">WORDLE HELPER</div>
         <i class="fas fa-cog"></i>
     </div>
@@ -97,6 +97,25 @@
             <div class="guessLetter"></div>
             <div class="guessLetter"></div>
         </div>
+    </div>
+    <div id="confirmationModal" class="modal">
+        <div class="confirmationModal-header"><i class="fas fa-exclamation-triangle"></i>warning</div>
+        <div class="confirmationModal-body">
+            <div>You are about to use WORDLE HELPER.</div>
+            <div>This will take all the fun out of playing WORDLE.</div>
+            <div class="confirmationModal-sadFace"><i class="fas fa-frown"></i></div>
+            <div>Are you sure?</div>
+        </div>
+        <div class="confirmationModal-footer">
+            <button id="confirmationModalCancelButton" class="confirmationModal-button">Cancel</button>
+            <button id="confirmationModalContinueButton" class="confirmationModal-button confirmationModal-button--danger">Continue</button>
+        </div>
+    </div>
+    <div id="exitModal" class="modal hide">
+        <div class="exitModal-message">have a nice day</div>
+        <div class="exitModal-happyFace"><i class="fas fa-smile"></i></div>
+        <div>You made the right decision.</div>
+        <div id="exitModalReconfirmButton" class="exitModal-reconfirm"><i class="fas fa-exclamation-triangle"></i></div>
     </div>
 </body>
 </html>

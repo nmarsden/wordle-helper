@@ -2,6 +2,11 @@ import {AVAILABLE_WORDS, GuessLetter, Hint} from "./globals";
 import {WordSuggester} from "./wordSuggester";
 
 export type Elems = {
+    confirmationModalElem: HTMLElement;
+    confirmationCancelButtonElem: HTMLElement;
+    confirmationContinueButtonElem: HTMLElement;
+    exitModalElem: HTMLElement;
+    exitModalReconfirmButtonElem: HTMLElement;
     resetButtonElem: HTMLElement;
     keyElems: NodeListOf<Element>;
     guessLetterElems: NodeListOf<Element>;
@@ -29,6 +34,11 @@ class WordleHelper {
     constructor() {
         this.wordSuggester = new WordSuggester(AVAILABLE_WORDS);
         this.elems = {
+            confirmationModalElem: document.getElementById('confirmationModal'),
+            confirmationCancelButtonElem: document.getElementById('confirmationModalCancelButton'),
+            confirmationContinueButtonElem: document.getElementById('confirmationModalContinueButton'),
+            exitModalElem: document.getElementById('exitModal'),
+            exitModalReconfirmButtonElem: document.getElementById('exitModalReconfirmButton'),
             resetButtonElem: document.getElementById('resetButton'),
             keyElems: document.querySelectorAll('.keyboard .key'),
             guessLetterElems: document.querySelectorAll('.guesses .guessLetter'),
@@ -43,7 +53,9 @@ class WordleHelper {
         for (let i=0; i< this.elems.guessLetterElems.length; i++) {
             this.state.guessLetters[i] = {letter: '', hint: '', position: (i % 5), word: Math.floor(i / 5)};
         }
-
+        this.elems.confirmationCancelButtonElem.addEventListener('click', this.onConfirmationCancelButtonClicked)
+        this.elems.confirmationContinueButtonElem.addEventListener('click', this.onConfirmationContinueButtonClicked)
+        this.elems.exitModalReconfirmButtonElem.addEventListener('click', this.onexitModalReconfirmButtonClicked)
         this.elems.resetButtonElem.addEventListener('click', this.onResetButtonClicked)
         this.elems.keyElems.forEach(elem => elem.addEventListener('click', this.onKeyClicked));
         this.elems.guessLetterElems.forEach((elem, index) => elem.addEventListener('click', this.onGuessLetterClicked(index)));
@@ -53,6 +65,18 @@ class WordleHelper {
     // ----------------------------------------
     //             Event Handlers
     // ----------------------------------------
+
+    onConfirmationCancelButtonClicked = (event) => {
+        this.elems.exitModalElem.classList.remove('hide');
+    }
+
+    onConfirmationContinueButtonClicked = (event) => {
+        this.elems.confirmationModalElem.classList.add('hide');
+    }
+
+    onexitModalReconfirmButtonClicked = (event) => {
+        this.elems.exitModalElem.classList.add('hide');
+    }
 
     onResetButtonClicked = (event) => {
         while (this.state.currentGuessLetterIndex !== 0) {
