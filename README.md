@@ -4,12 +4,13 @@ A tool to help play the [Wordle](https://www.powerlanguage.co.uk/wordle/) game.
 
 Enter played words as well as known hints for each letter.  A suggestion for the next guess to play will be calculated.
 
-The suggestion is determined based on the known set of Wordle words, and the letters and hints provided. In the case of multiple possible suggestions the top suggestion is chosen according to word popularity.
+The suggestion is determined based on the known set of Wordle words, and the letters and hints provided.
 
 ## Tech
-Built using vanilla HTML, CSS, and JavaScript. 
+Built using HTML, CSS, and TypeScript. 
 
-Used [Font Awesome](https://fontawesome.com/) for icons  
+Used [Font Awesome](https://fontawesome.com/) for icons.
+Used [Parcel](https://parceljs.org/) to build.
 
 ## TODOs
 * [x] initial design
