@@ -59,8 +59,8 @@ body,
     line-height: 2rem;
     padding: 1rem;
     margin: 0.05rem;
+    width: 2rem;
     height: 2rem;
-    aspect-ratio: 1 / 1;
     text-align: center;
     border: 1px solid var(--dark-grey);
     text-transform: uppercase;
