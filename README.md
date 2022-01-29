@@ -22,4 +22,5 @@ Used [Font Awesome](https://fontawesome.com/) for icons
 * [x] allow applying suggestion
 * [x] introduce unit tests  
 * [x] show initial warning confirmation modal
+* [ ] show info modal containing instructions
 * [ ] allow auto-enter first word on reset based on a configured word in settings
