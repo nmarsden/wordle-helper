@@ -1,6 +1,6 @@
 import {GuessLetter} from "./globals";
 
-type LetterFrequency = 'NONE' | 'ONE' | 'ONE_OR_MORE' | 'TWO_OR_MORE';
+type LetterFrequency = 'NONE' | 'ONE' | 'ONE_OR_MORE' | 'TWO' | 'TWO_OR_MORE';
 
 export class WordSuggester {
 
@@ -16,7 +16,8 @@ export class WordSuggester {
     }
     // group hints by word
     const hintsForLetterByWord: GuessLetter[][] = [];
-    for (let word = 0; word <= 5; word++) {
+    const maxWord = hintsForLetter[hintsForLetter.length - 1].word;
+    for (let word = 0; word <= maxWord; word++) {
       hintsForLetterByWord.push(hintsForLetter.filter(guessLetter => guessLetter.word === word));
     }
     // determine letter frequency
@@ -27,7 +28,11 @@ export class WordSuggester {
         const numPresent = hintsForLetterByWord[i].filter(guessLetter => guessLetter.hint === 'present').length;
         const numCorrect = hintsForLetterByWord[i].filter(guessLetter => guessLetter.hint === 'correct').length;
         if (numPresent + numCorrect > 1) {
-          result = 'TWO_OR_MORE';
+          if (numPresent + numCorrect === 2 && numAbsent > 0) {
+            result = 'TWO';
+          } else {
+            result = 'TWO_OR_MORE';
+          }
         } else if (numPresent + numCorrect === 1 && numAbsent > 0) {
           result = 'ONE';
         }
@@ -117,7 +122,11 @@ export class WordSuggester {
       let validNum = 0;
       knownLetterFrequency.forEach((frequency, letter) => {
         const count = letterCountInWord.get(letter) || 0;
-        if ((frequency === 'NONE' && count === 0) || (frequency === 'ONE' && count === 1) || (frequency === 'ONE_OR_MORE' && count >=1) || (frequency === 'TWO_OR_MORE' && count >= 2)) {
+        if ((frequency === 'NONE' && count === 0)
+          || (frequency === 'ONE' && count === 1)
+          || (frequency === 'ONE_OR_MORE' && count >=1)
+          || (frequency === 'TWO' && count === 2)
+          || (frequency === 'TWO_OR_MORE' && count >= 2)) {
           validNum++;
         }
       })
