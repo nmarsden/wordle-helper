@@ -26,9 +26,10 @@
     "deploy": "gh-pages -d dist",
     "test": "jest",
     "test:watch": "jest --watch",
-    "preanalyze": "rm -rf dist_analyze",
-    "analyze:targetwords": "parcel build src/analyzeFirstWordsWithTargetWords.ts --target analyze && node dist_analyze/analyzeFirstWordsWithTargetWords.js",
-    "analyze:dictwords": "parcel build src/analyzeFirstWordsWithDictionaryWords.ts --target analyze && node dist_analyze/analyzeFirstWordsWithDictionaryWords.js"
+    "preanalyze:targetwords": "rm -rf dist_analyze && parcel build src/analyzeFirstWordsWithTargetWords.ts --target analyze",
+    "analyze:targetwords": "node dist_analyze/analyzeFirstWordsWithTargetWords.js",
+    "preanalyze:dictwords": "rm -rf dist_analyze && parcel build src/analyzeFirstWordsWithDictionaryWords.ts --target analyze",
+    "analyze:dictwords": "node dist_analyze/analyzeFirstWordsWithDictionaryWords.js"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
