@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A tool to help play the [Wordle](https://www.powerlanguage.co.uk/wordle/) game.",
   "targets": {
+    "web": {
+      "distDir": "dist"
+    },
     "analyze": {
       "distDir": "dist_analyze",
       "engines": {"node": "16.13.2"}
@@ -21,7 +24,7 @@
   "scripts": {
     "start": "parcel serve src/index.html",
     "prebuild": "rm -rf dist",
-    "build": "parcel build src/index.html --public-url ./",
+    "build": "parcel build src/index.html --public-url ./ --target web",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "test": "jest",
