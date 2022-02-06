@@ -2,7 +2,12 @@
   "name": "wordle-helper",
   "version": "1.0.0",
   "description": "A tool to help play the [Wordle](https://www.powerlanguage.co.uk/wordle/) game.",
-  "source": "src/index.html",
+  "targets": {
+    "analyze": {
+      "distDir": "dist_analyze",
+      "engines": {"node": "16.13.2"}
+    }
+  },
   "jest": {
     "transform": {
       "^.+\\.(ts)$": [
@@ -14,13 +19,16 @@
     }
   },
   "scripts": {
-    "start": "parcel",
+    "start": "parcel serve src/index.html",
     "prebuild": "rm -rf dist",
-    "build": "parcel build --public-url ./",
+    "build": "parcel build src/index.html --public-url ./",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "preanalyze": "rm -rf dist_analyze",
+    "analyze:targetwords": "parcel build src/analyzeFirstWordsWithTargetWords.ts --target analyze && node dist_analyze/analyzeFirstWordsWithTargetWords.js",
+    "analyze:dictwords": "parcel build src/analyzeFirstWordsWithDictionaryWords.ts --target analyze && node dist_analyze/analyzeFirstWordsWithDictionaryWords.js"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",

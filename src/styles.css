@@ -7,6 +7,8 @@
     --dark-yellow: #b59f3b;
     --dark-green: #538d4e;
     --dark-red: #8d4e4e;
+    --scrollbar-track-color: #3a3a3c;
+    --scrollbar-thumb-color: #121214;
 }
 
 html {
@@ -22,6 +24,36 @@ body,
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--scrollbar-track-color);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color);
+    border-radius: 20px;
+    border: 3px solid var(--scrollbar-track-color);
+}
+
+@font-face {
+    font-family: 'Roboto Mono';
+    src: url('fonts/RobotoMono-Regular.woff2') format('woff2'),
+    url('fonts/RobotoMono-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 .header {
@@ -292,7 +324,77 @@ body,
     color: var(--bg-color);
 }
 
-.infoModal-button {
+.infoModal-okButton {
+    font-size: 1.2rem;
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 0.2rem;
+    min-width: 8rem;
+    color: var(--text-color);
+    border: 1px solid var(--dark-grey);
+    cursor: pointer;
+    user-select: none;
+    margin-top: 2rem;
+}
+
+.infoModal-analysisButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+    cursor: pointer;
+    color: var(--dark-grey);
+}
+
+.analysisModal-header {
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: 600;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    text-align: center;
+}
+
+.analysisModal-body {
+    margin: 0 1rem;
+    max-width: 90vw;
+    max-height: 80vw;
+    overflow: auto;
+}
+
+.analysisModal-table {
+    border-collapse: collapse;
+}
+
+.analysisModal-tableHeader th {
+    font-size: 0.6rem;
+    line-height: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+}
+
+.analysisModal-tableRow td {
+    text-align: right;
+    padding: 0.1rem 0.6rem;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.analysisModal-tableRow td:first-child {
+    text-align: left;
+}
+
+.analysisModal-tableRow:nth-child(odd) {
+    background-color: var(--dark-grey);
+}
+
+.analysisModal-footer {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.analysisModal-button {
     font-size: 1.2rem;
     background-color: var(--bg-color);
     padding: 1rem;

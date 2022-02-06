@@ -2,5 +2,6 @@
 .npmrc
 node_modules/
 dist/
+dist_analyze/
 .parcel-cache
 .DS_Store

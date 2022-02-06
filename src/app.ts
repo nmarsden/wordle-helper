@@ -1,5 +1,7 @@
-import {AVAILABLE_WORDS, GuessLetter, Hint} from "./globals";
+import {AVAILABLE_WORDS, FirstWordResult, GuessLetter, Hint} from "./globals";
 import {WordSuggester} from "./wordSuggester";
+// @ts-ignore
+import firstWordAnalysisData from "./data/firstWordAnalysisWithDictionaryWords.json";
 
 export type Elems = {
     confirmationModalElem: HTMLElement;
@@ -9,6 +11,10 @@ export type Elems = {
     exitModalReconfirmButtonElem: HTMLElement;
     infoModalElem: HTMLElement;
     infoModalOKButtonElem: HTMLElement;
+    infoModalAnalysisButtonElem: HTMLElement;
+    analysisModalElem: HTMLElement;
+    analysisModalTBodyElem: HTMLElement;
+    analysisModalOKButtonElem: HTMLElement;
     resetButtonElem: HTMLElement;
     infoButtonElem: HTMLElement;
     keyElems: NodeListOf<Element>;
@@ -44,6 +50,10 @@ class WordleHelper {
             exitModalReconfirmButtonElem: document.getElementById('exitModalReconfirmButton'),
             infoModalElem: document.getElementById('infoModal'),
             infoModalOKButtonElem: document.getElementById('infoModalOKButton'),
+            infoModalAnalysisButtonElem: document.getElementById('infoModalAnalysisButton'),
+            analysisModalElem: document.getElementById('analysisModal'),
+            analysisModalTBodyElem: document.getElementById('analysisModalTBody'),
+            analysisModalOKButtonElem: document.getElementById('analysisModalOKButton'),
             resetButtonElem: document.getElementById('resetButton'),
             infoButtonElem: document.getElementById('infoButton'),
             keyElems: document.querySelectorAll('.keyboard .key'),
@@ -59,15 +69,23 @@ class WordleHelper {
         for (let i=0; i< this.elems.guessLetterElems.length; i++) {
             this.state.guessLetters[i] = {letter: '', hint: '', position: (i % 5), word: Math.floor(i / 5)};
         }
-        this.elems.confirmationCancelButtonElem.addEventListener('click', this.onConfirmationCancelButtonClicked)
-        this.elems.confirmationContinueButtonElem.addEventListener('click', this.onConfirmationContinueButtonClicked)
-        this.elems.exitModalReconfirmButtonElem.addEventListener('click', this.onExitModalReconfirmButtonClicked)
-        this.elems.infoModalOKButtonElem.addEventListener('click', this.onInfoModalOKButtonClicked)
-        this.elems.resetButtonElem.addEventListener('click', this.onResetButtonClicked)
-        this.elems.infoButtonElem.addEventListener('click', this.onInfoButtonClicked)
+        this.elems.confirmationCancelButtonElem.addEventListener('click', this.onConfirmationCancelButtonClicked);
+        this.elems.confirmationContinueButtonElem.addEventListener('click', this.onConfirmationContinueButtonClicked);
+        this.elems.exitModalReconfirmButtonElem.addEventListener('click', this.onExitModalReconfirmButtonClicked);
+        this.elems.infoModalOKButtonElem.addEventListener('click', this.onInfoModalOKButtonClicked);
+        this.elems.infoModalAnalysisButtonElem.addEventListener('click', this.onInfoModalAnalysisButtonClicked);
+        this.elems.analysisModalOKButtonElem.addEventListener('click', this.onAnalysisModalOKButtonClicked);
+        this.elems.resetButtonElem.addEventListener('click', this.onResetButtonClicked);
+        this.elems.infoButtonElem.addEventListener('click', this.onInfoButtonClicked);
         this.elems.keyElems.forEach(elem => elem.addEventListener('click', this.onKeyClicked));
         this.elems.guessLetterElems.forEach((elem, index) => elem.addEventListener('click', this.onGuessLetterClicked(index)));
-        this.elems.suggestionUseButtonElem.addEventListener('click', this.onSuggestionUseButtonClicked)
+        this.elems.suggestionUseButtonElem.addEventListener('click', this.onSuggestionUseButtonClicked);
+        // Fill analysis table
+        const analysisData: FirstWordResult[] = firstWordAnalysisData;
+        analysisData.sort((a:FirstWordResult, b:FirstWordResult) => a.u6 - b.u6);
+        for (let i=0; i<10; i++) {
+            this.elems.analysisModalTBodyElem.appendChild(this.createTableRowNode(analysisData[i]));
+        }
     }
 
     // ----------------------------------------
@@ -89,6 +107,14 @@ class WordleHelper {
 
     onInfoModalOKButtonClicked = (event) => {
         this.elems.infoModalElem.classList.add('hide');
+    }
+
+    onInfoModalAnalysisButtonClicked = (event) => {
+        this.elems.analysisModalElem.classList.remove('hide');
+    }
+
+    onAnalysisModalOKButtonClicked = (event) => {
+        this.elems.analysisModalElem.classList.add('hide');
     }
 
     onResetButtonClicked = (event) => {
@@ -151,6 +177,20 @@ class WordleHelper {
     // ----------------------------------------
     //               Functions
     // ----------------------------------------
+
+    createTableRowNode(result: FirstWordResult): Node {
+        const tbody = document.createElement('tbody');
+        tbody.innerHTML = `<tr class="analysisModal-tableRow">
+            <td>${result.w.toUpperCase()}</td>
+            <td>${result.u6}</td>
+            <td>${result.u10}</td>
+            <td>${result.min}</td>
+            <td>${result.max}</td>
+            <td>${result.avg}</td>
+            <td>${result.med}</td>
+        </tr>`;
+        return tbody.firstChild;
+    }
 
     initialHint = (letter, position): Hint => {
         // TODO does not handle the case when there were multiple hints for the same letter in a single word: one being 'absent' and the other being 'correct' or 'present'

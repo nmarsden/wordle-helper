@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>Wordle Helper</title>
-    <link href="font_awesome/css/all.css" rel="stylesheet">
+    <link href="fonts/font_awesome/css/all.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
     <script type="module" src="app.ts"></script>
 </head>
@@ -127,7 +127,30 @@
             <div>To enter a hint, click a played letter. Click multiple times to set as <span class="infoModal-hintAbsent"></span>, <span class="infoModal-hintPresent"></span> or <span class="infoModal-hintCorrect"></span>.</div>
             <div>Click USE to fill the next word with the suggestion.</div>
         </div>
-        <button id="infoModalOKButton" class="infoModal-button">OK</button>
+        <button id="infoModalOKButton" class="infoModal-okButton">OK</button>
+        <div id="infoModalAnalysisButton" class="infoModal-analysisButton"><i class="fas fa-table"></i></div>
+    </div>
+    <div id="analysisModal" class="modal hide">
+        <div class="analysisModal-header">First word analysis</div>
+        <div class="analysisModal-body">
+            <table id="analysisModalTable" class="analysisModal-table">
+                <thead>
+                    <tr class="analysisModal-tableHeader">
+                        <th>Word</th>
+                        <th>UI6</th>
+                        <th>UI10</th>
+                        <th>Min</th>
+                        <th>Max</th>
+                        <th>Avg</th>
+                        <th>Med</th>
+                    </tr>
+                </thead>
+                <tbody id="analysisModalTBody"></tbody>
+            </table>
+        </div>
+        <div class="analysisModal-footer">
+            <button id="analysisModalOKButton" class="analysisModal-button">OK</button>
+        </div>
     </div>
 </body>
 </html>

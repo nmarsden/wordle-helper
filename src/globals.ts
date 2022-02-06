@@ -8,3 +8,13 @@ export type GuessLetter = {
   position: number;
   word: number;
 }
+
+export type FirstWordResult = {
+  w: string;
+  u6: number;
+  u10: number;
+  min: number;
+  max: number;
+  avg: number;
+  med: number;
+}
